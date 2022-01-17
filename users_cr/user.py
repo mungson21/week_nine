@@ -23,7 +23,18 @@ class User:
         return users
 
     @classmethod
+    def get_one(cls, data):
+        query='SELECT * FROM users WHERE id = %(id)s;'
+        results = connectToMySQL('users_schema').query_db(query, data)
+        return cls(results[0])
+
+    @classmethod
     def save(cls, data ):
         query = "INSERT INTO users ( first_name , last_name , email, created_at, updated_at ) VALUES ( %(fname)s , %(lname)s , %(email)s , NOW() , NOW() );"
         # data is a dictionary that will be passed into the save method from server.py
         return connectToMySQL('users_schema').query_db( query, data )
+
+    @classmethod
+    def update(cls, form_data):
+        query='UPDATE users SET first_name = %(first_name)s, last_name = %(last_name)s, email = %(email)s WHERE id = %(id)s;'
+        return connectToMySQL('users_schema').query_db(query, form_data)

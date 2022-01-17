@@ -2,6 +2,11 @@ from flask import Flask, render_template, request, redirect
 from user import User
 app = Flask(__name__)
 
+
+@app.route('/')
+def default():
+    return redirect('/users')
+
 @app.route('/users/new')
 def index():
     return render_template("users_new.html")
@@ -25,6 +30,15 @@ def users():
     print(users)
 
     return render_template("users.html", users=users)
+
+# Edit User
+@app.route('/edit/<int:user_id>')
+def edit_user(user_id):
+    data = {
+        'id' :user_id
+    }
+    user = User.get_one(data)
+    return render_template('user_edit.html', user=user)
 
 if __name__=="__main__":
     app.run(debug=True)

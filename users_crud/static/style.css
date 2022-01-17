@@ -1,0 +1,16 @@
+* {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+table, tr, th, td {
+    border: 2px solid black;
+    border-collapse: collapse;
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+.main_data {
+    border: 2px solid black;
+    margin-top: 10px;
+    width: 360px;
+}
